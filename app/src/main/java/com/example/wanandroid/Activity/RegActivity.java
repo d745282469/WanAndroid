@@ -8,6 +8,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.wanandroid.Api.WanApi;
+import com.example.wanandroid.CustomView.WebBar;
 import com.example.wanandroid.R;
 import com.example.wanandroid.Utils.L;
 import com.google.gson.Gson;
@@ -21,6 +22,7 @@ public class RegActivity extends AppCompatActivity {
 
     private EditText et_username,et_password,et_repassword;
     private TextView btn_reg;
+    private WebBar webBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,9 @@ public class RegActivity extends AppCompatActivity {
         et_password = findViewById(R.id.et_password);
         et_repassword = findViewById(R.id.et_repassword);
         btn_reg = findViewById(R.id.btn_reg);
+        webBar = findViewById(R.id.web_bar);
+
+        webBar.showRightIcon(false);
     }
 
     private void initEvent(){

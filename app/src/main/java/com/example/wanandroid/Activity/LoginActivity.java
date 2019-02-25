@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.example.wanandroid.Api.*;
 
+import com.example.wanandroid.CustomView.WebBar;
 import com.example.wanandroid.R;
 import com.example.wanandroid.Utils.L;
 import com.example.wanandroid.Utils.SpManager;
@@ -23,6 +24,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText et_username,et_password;
     private TextView btn_login,btn_gotoReg;
+    private WebBar webBar;
 
     private SpManager spManager;
 
@@ -42,6 +44,9 @@ public class LoginActivity extends AppCompatActivity {
         et_password = findViewById(R.id.et_password);
         btn_login = findViewById(R.id.btn_login);
         btn_gotoReg = findViewById(R.id.btn_goto_reg);
+        webBar = findViewById(R.id.web_bar);
+
+        webBar.showRightIcon(false);
     }
 
     private void initEvent(){
