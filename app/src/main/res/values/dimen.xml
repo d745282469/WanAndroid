@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--边距-->
+    <dimen name="page_padding">15dp</dimen>
+    <dimen name="login_page_padding">40dp</dimen>
+    <dimen name="page_line_margin">30dp</dimen>
+    <dimen name="main_bottom_icon_width">25dp</dimen>
+
+    <!--文字-->
+    <dimen name="nav_username_text_size">17dp</dimen>
+    <dimen name="page_text_size_normal">15dp</dimen>
+    <dimen name="login_slogan_text_size">30dp</dimen>
+    <dimen name="page_btn_size">16dp</dimen>
+    <dimen name="page_toolbar_title_text_size">17dp</dimen>
+    <dimen name="page_text_size_small_title">14dp</dimen>
+</resources>

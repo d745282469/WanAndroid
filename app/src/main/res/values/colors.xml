@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="page_btn_text_white">#ffffff</color>
+    <color name="page_toolbar_text">#ffffff</color>
+    <color name="page_text_white">#ffffff</color>
+    <color name="page_background_color">#ECECEC</color>
+    <color name="page_text_gray">#9d9d9d</color>
+    <color name="page_line">#C2C2C2</color>
+    <color name="page_text_normal">#000000</color>
+    <color name="page_text_view_border_act">#22ad79</color>
+    <color name="page_tab_act">#FDAC45</color>
+    <color name="page_select_result">#D5D5D5</color>
+</resources>

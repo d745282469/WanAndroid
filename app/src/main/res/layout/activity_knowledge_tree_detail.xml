@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.KnowledgeTreeDetailActivity"
+    android:orientation="vertical">
+
+    <com.example.wanandroid.CustomView.WebBar
+        android:id="@+id/web_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"/>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/tl_tab"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:tabIndicatorColor="@color/page_tab_act"
+        app:tabSelectedTextColor="@color/page_tab_act"
+        app:tabTextColor="#ffffff"
+        app:tabMode="scrollable"
+        android:background="@color/colorPrimary"
+        app:tabTextAppearance="@style/TabLayoutTheme"
+        />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vp_knowledge_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    </android.support.v4.view.ViewPager>
+    
+</LinearLayout>

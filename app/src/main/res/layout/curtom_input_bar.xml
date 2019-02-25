@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="?attr/actionBarSize"
+    android:background="@color/colorPrimary"
+    android:orientation="horizontal"
+    android:paddingStart="0dp"
+    android:paddingLeft="@dimen/page_padding"
+    android:paddingEnd="0dp"
+    android:paddingRight="@dimen/page_padding">
+
+    <LinearLayout
+        android:id="@+id/ll_bar_back"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/page_select_result"
+        android:clickable="true"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/page_line_arrow"
+            android:backgroundTint="#ffffff"
+            android:rotation="180" />
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/et_bar_content"
+        android:layout_width="0dp"
+        android:layout_height="35dp"
+        android:layout_weight="1"
+        android:background="@drawable/tv_border_round_gray"
+        android:hint="@string/app_name"
+        android:maxLines="1"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/page_text_normal"
+        android:textColorHint="@color/page_text_gray"
+        android:textSize="@dimen/page_text_size_normal"
+        android:layout_gravity="center_vertical"
+        android:imeOptions="actionSearch"/>
+
+    <LinearLayout
+        android:id="@+id/ll_bar_right"
+        android:layout_width="50dp"
+        android:layout_height="match_parent"
+        android:background="@drawable/page_select_result"
+        android:clickable="true"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/iv_bar_right"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:background="@drawable/page_toolbar_search"
+            android:backgroundTint="#ffffff" />
+
+    </LinearLayout>
+
+</LinearLayout>

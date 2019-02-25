@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/refreshLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/page_padding"
+        android:paddingRight="@dimen/page_padding">
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/sv_nested"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="160dp"
+                    android:layout_marginTop="@dimen/page_padding">
+
+                    <!--轮播图-->
+                    <android.support.v4.view.ViewPager
+                        android:id="@+id/vp_banner"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:clickable="true"/>
+
+                    <!--半透明背景-->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:alpha="0.4"
+                        android:background="#000000">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="10dp"
+                            android:text="@string/app_name"
+                            android:textColor="@color/page_text_white"
+                            android:textSize="@dimen/page_text_size_normal"
+                            android:visibility="invisible" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_banner_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:padding="10dp"
+                        android:text="@string/app_name"
+                        android:textColor="@color/page_text_white"
+                        android:textSize="@dimen/page_text_size_normal" />
+                </RelativeLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_article"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/page_padding" />
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <!--回到顶部按钮-->
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fbtn_back_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_marginBottom="@dimen/page_padding"
+            android:src="@drawable/page_back_top_icon"
+            app:backgroundTint="@color/colorPrimary" />
+
+    </android.support.design.widget.CoordinatorLayout>
+
+</android.support.v4.widget.SwipeRefreshLayout>

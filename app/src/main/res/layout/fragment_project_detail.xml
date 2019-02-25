@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/page_background_color"
+    android:paddingLeft="@dimen/page_padding"
+    android:paddingRight="@dimen/page_padding"
+    >
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/sv_nested"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_project"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/page_padding" />
+    </android.support.v4.widget.NestedScrollView>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fbtn_back_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_marginBottom="@dimen/page_padding"
+        android:src="@drawable/page_back_top_icon"
+        app:backgroundTint="@color/colorPrimary"
+        android:clickable="true"
+        android:focusable="true" />
+
+
+</android.support.design.widget.CoordinatorLayout>

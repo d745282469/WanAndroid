@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <LinearLayout
+        android:id="@+id/ll_search_history_item"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/page_padding"
+        android:paddingRight="@dimen/page_padding"
+        android:paddingTop="7dp"
+        android:paddingBottom="7dp">
+
+        <TextView
+            android:id="@+id/tv_search_history_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/app_name"
+            android:textColor="@color/page_text_normal"
+            android:textSize="@dimen/page_text_size_normal" />
+
+        <ImageView
+            android:id="@+id/iv_search_history_clear"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/page_cha"
+            android:layout_marginTop="5dp"
+            />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:background="@color/page_line"/>
+
+</LinearLayout>
