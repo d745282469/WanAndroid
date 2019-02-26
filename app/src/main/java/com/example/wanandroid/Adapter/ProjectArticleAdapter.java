@@ -19,6 +19,8 @@ import com.example.wanandroid.R;
 
 import java.util.List;
 
+import cn.bingoogolapple.photopicker.activity.BGAPhotoPreviewActivity;
+
 public class ProjectArticleAdapter extends RecyclerView.Adapter<ProjectArticleAdapter.ViewHolder> {
     private Context context;
     private List<ArticleItem> itemList;
@@ -53,6 +55,18 @@ public class ProjectArticleAdapter extends RecyclerView.Adapter<ProjectArticleAd
                 intent.putExtra("collect",item.isCollect());
                 intent.putExtra("author",item.getAuthor());
                 intent.putExtra("originId",item.getId());
+                Activity activity = (Activity) context;
+                activity.startActivity(intent);
+            }
+        });
+
+        holder.iv_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new BGAPhotoPreviewActivity.IntentBuilder(context)
+                        .previewPhoto(item.getEnvelopePic())
+                        .currentPosition(0)
+                        .build();
                 Activity activity = (Activity) context;
                 activity.startActivity(intent);
             }
