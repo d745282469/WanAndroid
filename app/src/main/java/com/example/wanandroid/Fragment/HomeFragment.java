@@ -37,6 +37,7 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import okhttp3.Call;
 
@@ -222,6 +223,7 @@ public class HomeFragment extends Fragment {
      * 获取首页轮播图
      */
     private void GetBanner() {
+        refreshLayout.setRefreshing(true);
         WanApi.GetBanner(new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
@@ -250,9 +252,9 @@ public class HomeFragment extends Fragment {
                         bannerItem.setWebUrl(item.get("url").getAsString());
                         bannerItemList.add(bannerItem);
 
-                        View view = getLayoutInflater().inflate(R.layout.item_home_banner, null);
+                        @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.item_home_banner, null);
                         ImageView imageView = view.findViewById(R.id.iv_img);
-                        Glide.with(getContext()).load(item.get("imagePath").getAsString()).into(imageView);
+                        Glide.with(Objects.requireNonNull(getContext())).load(item.get("imagePath").getAsString()).into(imageView);
                         tv_banner_title.setText(array.get(0).getAsJsonObject().get("title").getAsString());
 
                         viewList.add(view);
@@ -298,6 +300,7 @@ public class HomeFragment extends Fragment {
         if (page == 0) {
             articleItemList.clear();
         }
+        refreshLayout.setRefreshing(true);
         WanApi.GetHomeArticleList(page, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {

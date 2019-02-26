@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -36,6 +37,7 @@ public class KnowledgeDetailFragment extends Fragment {
     private HomeArticleAdapter homeArticleAdapter;
     private NestedScrollView sv_nested;
     private FloatingActionButton fbtn_back_top;
+    private SwipeRefreshLayout refreshLayout;
 
     private List<ArticleItem> articleItemList;
     private int currentPage = 0;
@@ -79,6 +81,9 @@ public class KnowledgeDetailFragment extends Fragment {
         rv_project = rootView.findViewById(R.id.rv_project);
         sv_nested = rootView.findViewById(R.id.sv_nested);
         fbtn_back_top = rootView.findViewById(R.id.fbtn_back_top);
+        refreshLayout = rootView.findViewById(R.id.refreshLayout);
+
+        refreshLayout.setEnabled(false);
     }
 
     /**
@@ -110,15 +115,21 @@ public class KnowledgeDetailFragment extends Fragment {
      * @param page 页码
      */
     private void GetKnowledgeArticle(int id, final int page) {
+        if (page == 0){
+            articleItemList.clear();
+        }
+        refreshLayout.setRefreshing(true);
         WanApi.GetKnowledgeArticle(id, page, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
+                refreshLayout.setRefreshing(false);
                 Toast.makeText(context, "获取知识体系文章失败：网络错误", Toast.LENGTH_SHORT).show();
                 L.e(TAG, "获取知识体系文章失败：网络错误" + e.toString());
             }
 
             @Override
             public void onResponse(String response, int id) {
+                refreshLayout.setRefreshing(false);
                 L.d(TAG, "获取知识体系文章回调：" + response);
                 JsonObject object = new Gson().fromJson(response, JsonObject.class);
                 if (object.get("errorCode").getAsInt() != 0) {

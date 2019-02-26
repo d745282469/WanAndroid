@@ -37,7 +37,7 @@ public class HomeArticleAdapter extends RecyclerView.Adapter<HomeArticleAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         final ArticleItem item = itemList.get(position);
 //        Glide.with(context).load(item.getImgUrl()).into(holder.iv_img);
         holder.tv_title.setText(Html.fromHtml(item.getTitle()));
@@ -82,13 +82,13 @@ public class HomeArticleAdapter extends RecyclerView.Adapter<HomeArticleAdapter.
         return itemList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView tv_title, tv_author, tv_super_chapter_name, tv_chapter_name, tv_nice_date,
                 tv_fresh;
         ImageView iv_collect;
         LinearLayout ll_item;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             tv_title = view.findViewById(R.id.tv_article_title);
             tv_author = view.findViewById(R.id.tv_author);

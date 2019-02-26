@@ -35,4 +35,8 @@ dependencies {
     //glide
     implementation 'com.github.bumptech.glide:glide:4.9.0'
 
+    //图片选择框架
+    implementation 'cn.bingoogolapple:bga-photopicker:1.2.8@aar'
+    implementation 'cn.bingoogolapple:bga-baseadapter:1.2.7@aar'
+
 }

@@ -3,6 +3,7 @@ package com.example.wanandroid.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,6 +33,7 @@ public class MyCollectActivity extends AppCompatActivity {
     private RecyclerView rv_my_collect;
     private HomeArticleAdapter homeArticleAdapter;
     private NestedScrollView sv_nesed;
+    private SwipeRefreshLayout refreshLayout;
 
     private List<ArticleItem> articleItemList;
     private Context context;
@@ -65,8 +67,10 @@ public class MyCollectActivity extends AppCompatActivity {
         webBar = findViewById(R.id.web_bar);
         rv_my_collect = findViewById(R.id.rv_my_collect);
         sv_nesed = findViewById(R.id.sv_nested);
+        refreshLayout = findViewById(R.id.refreshLayout);
 
         webBar.showRightIcon(false);
+        webBar.setTitle("我的收藏");
     }
 
     private void initEvent(){
@@ -79,21 +83,31 @@ public class MyCollectActivity extends AppCompatActivity {
                 }
             }
         });
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                GetCollectList(0);
+            }
+        });
     }
 
     private void GetCollectList(final int page) {
         if (page == 0) {
             articleItemList.clear();
         }
+        refreshLayout.setRefreshing(true);
         WanApi.GetMyCollectList(page, new StringCallback() {
             @Override
             public void onError(Call call, Exception e, int id) {
+                refreshLayout.setRefreshing(false);
                 Toast.makeText(context, "获取收藏列表失败：网络错误", Toast.LENGTH_SHORT).show();
                 L.e(TAG, "获取收藏列表失败：" + e.toString());
             }
 
             @Override
             public void onResponse(String response, int id) {
+                refreshLayout.setRefreshing(false);
                 L.d(TAG, "获取收藏列表回调：" + response);
                 JsonObject object = new Gson().fromJson(response, JsonObject.class);
                 if (object.get("errorCode").getAsInt() != 0) {
