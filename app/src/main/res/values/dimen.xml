@@ -13,4 +13,5 @@
     <dimen name="page_btn_size">16dp</dimen>
     <dimen name="page_toolbar_title_text_size">17dp</dimen>
     <dimen name="page_text_size_small_title">14dp</dimen>
+    <dimen name="page_dialog_btn_size">20dp</dimen>
 </resources>

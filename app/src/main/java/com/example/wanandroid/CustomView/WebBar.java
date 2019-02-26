@@ -85,7 +85,7 @@ public class WebBar extends LinearLayout {
     }
 
     public void setRightIcon(Drawable drawable){
-        iv_right.setImageDrawable(drawable);
+        iv_right.setBackground(drawable);
     }
 
 }

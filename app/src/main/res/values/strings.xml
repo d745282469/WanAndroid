@@ -50,4 +50,12 @@
         <p>\t\t<a href="https://github.com/hdodenhof/CircleImageView" target="_blank">CircleImageView—hdodenhof</a></p>
         <p>\t\t<a href="https://github.com/bingoogolapple/BGAPhotoPicker-Android" target="_blank">BGAPhotoPicker-Android—bingoogolapple</a></p>
     ]]></string>
+
+    <!--收藏页-->
+    <string name="collect_add_collect">添加收藏</string>
+    <string name="collect_sure_collect">添加</string>
+    <string name="collect_cancel_collect">取消</string>
+    <string name="collect_add_title">标题</string>
+    <string name="collect_add_author">作者</string>
+    <string name="collect_add_link">链接</string>
 </resources>

@@ -13,6 +13,7 @@ import android.widget.Toast;
 import com.example.wanandroid.Adapter.ArticleItem;
 import com.example.wanandroid.Adapter.HomeArticleAdapter;
 import com.example.wanandroid.Api.WanApi;
+import com.example.wanandroid.CustomView.AddCollectDialog;
 import com.example.wanandroid.CustomView.WebBar;
 import com.example.wanandroid.R;
 import com.example.wanandroid.Utils.L;
@@ -69,11 +70,11 @@ public class MyCollectActivity extends AppCompatActivity {
         sv_nesed = findViewById(R.id.sv_nested);
         refreshLayout = findViewById(R.id.refreshLayout);
 
-        webBar.showRightIcon(false);
+        webBar.setRightIcon(getDrawable(R.drawable.collect_add_collect));
         webBar.setTitle("我的收藏");
     }
 
-    private void initEvent(){
+    private void initEvent() {
         sv_nesed.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
             @Override
             public void onScrollChange(NestedScrollView view, int x, int y, int oldX, int oldY) {
@@ -88,6 +89,38 @@ public class MyCollectActivity extends AppCompatActivity {
             @Override
             public void onRefresh() {
                 GetCollectList(0);
+            }
+        });
+
+        webBar.setOnRightIconClickListener(new WebBar.OnRightIconClickListener() {
+            @Override
+            public void onClick() {
+                final AddCollectDialog dialog = new AddCollectDialog(context);
+                dialog.show();
+                dialog.setOnSureClickListener(new AddCollectDialog.OnSureClickListener() {
+                    @Override
+                    public void onSureClick(String s1, String s2, String s3) {
+                        WanApi.CollectArticle(s1, s2, s3, new StringCallback() {
+                            @Override
+                            public void onError(Call call, Exception e, int id) {
+                                Toast.makeText(context,"收藏站外文章失败：网络错误",Toast.LENGTH_SHORT).show();
+                                L.e(TAG,"收藏站外文章失败："+e.toString());
+                            }
+
+                            @Override
+                            public void onResponse(String response, int id) {
+                                L.d(TAG,"收藏站外文章回调："+response);
+                                JsonObject object = new Gson().fromJson(response,JsonObject.class);
+                                if (object.get("errorCode").getAsInt()!=0){
+                                    Toast.makeText(context,"收藏站外文章失败："+object.get("errorMsg").getAsString(),Toast.LENGTH_SHORT).show();
+                                }else {
+                                    dialog.dismiss();
+                                    GetCollectList(0);
+                                }
+                            }
+                        });
+                    }
+                });
             }
         });
     }
