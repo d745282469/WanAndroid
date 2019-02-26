@@ -1,5 +1,6 @@
 package com.example.wanandroid.Activity;
 
+import android.Manifest;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -27,10 +28,14 @@ import com.example.wanandroid.Fragment.KnowledgeFragment;
 import com.example.wanandroid.Fragment.ProjectFragment;
 import com.example.wanandroid.R;
 import com.example.wanandroid.Utils.L;
+import com.example.wanandroid.Utils.PermissionTool;
 import com.example.wanandroid.Utils.SpManager;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.zhy.http.okhttp.callback.StringCallback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Call;
 
@@ -52,6 +57,22 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //申请权限
+        List<String> perms = new ArrayList<>();
+        perms.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        PermissionTool tool = new PermissionTool(MainActivity.this,perms);
+        tool.setGetPermissionResultListener(new PermissionTool.GetPermissionResultListener() {
+            @Override
+            public void getPermissionSuccess() {
+
+            }
+
+            @Override
+            public void getPermissionFail(List<String> permissions) {
+                Toast.makeText(MainActivity.this,"拒绝权限将导致某些功能无法正常使用",Toast.LENGTH_SHORT).show();
+            }
+        });
 
         spManager = new SpManager(this);
 
@@ -192,4 +213,8 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        PermissionTool.onResult(requestCode,permissions,grantResults);
+    }
 }
