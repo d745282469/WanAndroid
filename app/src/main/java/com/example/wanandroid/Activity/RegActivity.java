@@ -41,6 +41,7 @@ public class RegActivity extends AppCompatActivity {
         webBar = findViewById(R.id.web_bar);
 
         webBar.showRightIcon(false);
+        webBar.setTitle("注册");
     }
 
     private void initEvent(){

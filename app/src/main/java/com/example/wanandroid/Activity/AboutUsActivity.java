@@ -23,5 +23,6 @@ public class AboutUsActivity extends AppCompatActivity {
 
         WebBar webBar = findViewById(R.id.web_bar);
         webBar.showRightIcon(false);
+        webBar.setTitle("关于我们");
     }
 }

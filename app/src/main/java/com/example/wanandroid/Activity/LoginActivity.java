@@ -47,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         webBar = findViewById(R.id.web_bar);
 
         webBar.showRightIcon(false);
+        webBar.setTitle("登陆");
     }
 
     private void initEvent(){
