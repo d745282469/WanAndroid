@@ -39,4 +39,6 @@ dependencies {
     implementation 'cn.bingoogolapple:bga-photopicker:1.2.8@aar'
     implementation 'cn.bingoogolapple:bga-baseadapter:1.2.7@aar'
 
+    //腾讯bugly 异常上报
+    implementation 'com.tencent.bugly:crashreport:2.2.0'
 }

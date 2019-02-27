@@ -1,6 +1,7 @@
 package com.example.wanandroid.Activity;
 
 import com.example.wanandroid.Utils.L;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.cookie.CookieJarImpl;
 import com.zhy.http.okhttp.cookie.store.PersistentCookieStore;
@@ -31,5 +32,7 @@ public class Application extends android.app.Application {
             L.d(TAG,"WanAndroid cookie: expiresAt="+cookie.expiresAt()+",value="+cookie.value());
         }
 
+        //bugly 异常上报
+        CrashReport.initCrashReport(getApplicationContext(),"c6eedcd771",true);
     }
 }
