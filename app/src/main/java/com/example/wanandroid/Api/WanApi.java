@@ -4,6 +4,9 @@ import com.example.wanandroid.Utils.L;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import okhttp3.HttpUrl;
+import okhttp3.OkHttpClient;
+
 public class WanApi {
     private final static String baseUrl = "http://www.wanandroid.com";
 
@@ -83,6 +86,8 @@ public class WanApi {
                 .url(baseUrl + homeArticleUrl)
                 .build()
                 .execute(stringCallback);
+        OkHttpClient client = OkHttpUtils.getInstance().getOkHttpClient();
+        L.d(client.cookieJar().loadForRequest(HttpUrl.parse(baseUrl)).toString());
     }
 
     /**

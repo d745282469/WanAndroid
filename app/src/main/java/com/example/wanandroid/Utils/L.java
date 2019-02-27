@@ -7,6 +7,7 @@ import android.util.Log;
  * 2019年2月20日14:02:30
  */
 public class L {
+    private static final String TAG = "Dong-Debug";
     private static boolean isDebug = true;
 
     public static void isDebug (Boolean isDebug){
@@ -23,6 +24,12 @@ public class L {
     public static void d(String tag,String msg){
         if (isDebug){
             Log.d(tag,msg);
+        }
+    }
+
+    public static void d(String msg){
+        if (isDebug){
+            Log.d(TAG,msg);
         }
     }
 
