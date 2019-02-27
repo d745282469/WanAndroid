@@ -193,6 +193,15 @@ public class WebViewActivity extends AppCompatActivity {
         webSettings.setDefaultTextEncodingName("utf-8");
         webSettings.setMixedContentMode(WebSettings.MIXED_CONTENT_ALWAYS_ALLOW);
 
+        //是否加载图片
+        if (spManager.getNoImg()){
+            //无图模式
+            webSettings.setLoadsImagesAutomatically(false);
+        }else {
+            webSettings.setLoadsImagesAutomatically(true);
+        }
+
+
         //拦截超链接事件，在该webView中打开
         webView.setWebViewClient(new WebViewClient() {
             @Override

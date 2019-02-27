@@ -30,6 +30,7 @@ import com.example.wanandroid.Adapter.HomeArticleAdapter;
 import com.example.wanandroid.Api.WanApi;
 import com.example.wanandroid.R;
 import com.example.wanandroid.Utils.L;
+import com.example.wanandroid.Utils.SpManager;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
@@ -60,10 +61,13 @@ public class HomeFragment extends Fragment {
     private boolean isScrooling = false;//是否手动滑动中
     private int currentPage = 0;
     private boolean bannerSwitch = true;//轮播图开关
+    private SpManager spManager;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        spManager = new SpManager(getContext());
 
         rootView = inflater.inflate(R.layout.fragment_home, container, false);
         initView();
@@ -254,7 +258,9 @@ public class HomeFragment extends Fragment {
 
                         @SuppressLint("InflateParams") View view = getLayoutInflater().inflate(R.layout.item_home_banner, null);
                         ImageView imageView = view.findViewById(R.id.iv_img);
-                        Glide.with(Objects.requireNonNull(getContext())).load(item.get("imagePath").getAsString()).into(imageView);
+                        if (!spManager.getNoImg()){
+                            Glide.with(Objects.requireNonNull(getContext())).load(item.get("imagePath").getAsString()).into(imageView);
+                        }
                         tv_banner_title.setText(array.get(0).getAsJsonObject().get("title").getAsString());
 
                         viewList.add(view);

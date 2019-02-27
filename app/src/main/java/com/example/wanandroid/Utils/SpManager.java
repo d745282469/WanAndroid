@@ -16,6 +16,7 @@ public class SpManager {
     private final String USER_NAME = "userName";
     private final String USER_STATUS = "userStatus";
     private final String SEARCH_HISTORY = "searchHistory";
+    private final String NO_IMG = "noImg";
 
     public SpManager(Context context) {
         this.context = context;
@@ -60,5 +61,13 @@ public class SpManager {
 
     public void deleteSearchHistory(Set<String> strings){
         userInfoSp.edit().putStringSet(SEARCH_HISTORY,strings).apply();
+    }
+
+    public void setNoImg(boolean b){
+        userInfoSp.edit().putBoolean(NO_IMG,b).apply();
+    }
+
+    public boolean getNoImg(){
+        return userInfoSp.getBoolean(NO_IMG,false);
     }
 }

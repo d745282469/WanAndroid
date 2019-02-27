@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.example.wanandroid.Activity.WebViewActivity;
 import com.example.wanandroid.R;
+import com.example.wanandroid.Utils.SpManager;
 
 import java.util.List;
 
@@ -40,7 +41,12 @@ public class ProjectArticleAdapter extends RecyclerView.Adapter<ProjectArticleAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         final ArticleItem item = itemList.get(position);
-        Glide.with(context).load(item.getEnvelopePic()).into(holder.iv_img);
+        SpManager spManager = new SpManager(context);
+        if (spManager.getNoImg()){
+            Glide.with(context).load(R.drawable.page_no_img).into(holder.iv_img);
+        }else {
+            Glide.with(context).load(item.getEnvelopePic()).into(holder.iv_img);
+        }
         holder.tv_title.setText(Html.fromHtml(item.getTitle()));
         holder.tv_author.setText(item.getAuthor());
         holder.tv_date.setText(item.getNickDate());
