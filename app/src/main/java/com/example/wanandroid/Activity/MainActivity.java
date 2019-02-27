@@ -12,6 +12,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
@@ -42,15 +43,17 @@ import okhttp3.Call;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private SpManager spManager;
+    private final int BACK_TIME = 2000;//两次回退间隔时间,ms
+    private long firstBackTime = 0;
 
-    private TextView tv_title, tv_slide_header_username,tv_text_home,tv_text_project,
-    tv_text_knowledge,tv_text_gzh;
-    private ImageView iv_icon_home,iv_icon_project,
-    iv_icon_knowledge,iv_icon_gzh;
+    private TextView tv_title, tv_slide_header_username, tv_text_home, tv_text_project,
+            tv_text_knowledge, tv_text_gzh;
+    private ImageView iv_icon_home, iv_icon_project,
+            iv_icon_knowledge, iv_icon_gzh;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
     private FrameLayout fl_content;
-    private LinearLayout ll_bar_slide, ll_bar_search,ll_btn_home,ll_btn_project,ll_btn_knowledg,ll_btn_gzh;
+    private LinearLayout ll_bar_slide, ll_bar_search, ll_btn_home, ll_btn_project, ll_btn_knowledg, ll_btn_gzh;
     private BottomNavigationView bottom_nav;
 
     @Override
@@ -61,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         //申请权限
         List<String> perms = new ArrayList<>();
         perms.add(Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        PermissionTool tool = new PermissionTool(MainActivity.this,perms);
+        PermissionTool tool = new PermissionTool(MainActivity.this, perms);
         tool.setGetPermissionResultListener(new PermissionTool.GetPermissionResultListener() {
             @Override
             public void getPermissionSuccess() {
@@ -70,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void getPermissionFail(List<String> permissions) {
-                Toast.makeText(MainActivity.this,"拒绝权限将导致某些功能无法正常使用",Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "拒绝权限将导致某些功能无法正常使用", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -158,14 +161,14 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.nav_my_collect:
-                        if (spManager.getStatus()==0){
-                            startActivity(new Intent(MainActivity.this,LoginActivity.class));
-                        }else {
-                            startActivity(new Intent(MainActivity.this,MyCollectActivity.class));
+                        if (spManager.getStatus() == 0) {
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        } else {
+                            startActivity(new Intent(MainActivity.this, MyCollectActivity.class));
                         }
                         break;
                     case R.id.nav_about:
-                        startActivity(new Intent(MainActivity.this,AboutUsActivity.class));
+                        startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
                         break;
                 }
                 return true;
@@ -175,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
         bottom_nav.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-                switch (menuItem.getItemId()){
+                switch (menuItem.getItemId()) {
                     case R.id.nav_bottom_home:
                         tv_title.setText(getString(R.string.app_name));
                         replaceFragment(new HomeFragment());
@@ -200,21 +203,44 @@ public class MainActivity extends AppCompatActivity {
         ll_bar_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,SearchActivity.class));
+                startActivity(new Intent(MainActivity.this, SearchActivity.class));
 //                startActivity(new Intent(MainActivity.this, WebViewActivity.class));
             }
         });
     }
 
-    private void replaceFragment(Fragment fragment){
+    private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        transaction.replace(R.id.fl_content,fragment);
+        transaction.replace(R.id.fl_content, fragment);
         transaction.commit();
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        PermissionTool.onResult(requestCode,permissions,grantResults);
+        PermissionTool.onResult(requestCode, permissions, grantResults);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_DOWN) {
+            long secondBackTime = System.currentTimeMillis();
+            if (firstBackTime > 0) {
+                if (secondBackTime - firstBackTime <= BACK_TIME) {
+                    //两次回退间隔时间小于设置时间，退出应用
+                    finish();
+                    return true;
+                } else {
+                    Toast.makeText(MainActivity.this, "再次按下退出", Toast.LENGTH_SHORT).show();
+                    firstBackTime = secondBackTime;
+                    return false;
+                }
+            } else {
+                Toast.makeText(MainActivity.this, "再次按下退出", Toast.LENGTH_SHORT).show();
+                firstBackTime = secondBackTime;
+                return false;
+            }
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
