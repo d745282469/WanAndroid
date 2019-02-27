@@ -274,11 +274,25 @@ public class WanApi {
      * @param originId       如果是站内文章则为站内文章的id，如果是站外文章则为-1
      * @param stringCallback 回调
      */
-    public static void CanccelCollect_2(int id, int originId, StringCallback stringCallback) {
+    public static void CancelCollect_2(int id, int originId, StringCallback stringCallback) {
         String url = "/lg/uncollect/" + id + "/json";
         OkHttpUtils.post()
                 .url(baseUrl + url)
                 .addParams("originId", String.valueOf(originId))
+                .build()
+                .execute(stringCallback);
+    }
+
+    /**
+     * 加载收藏的网站
+     * 暂时被用来当做是否登录过期的接口
+     *
+     * @param stringCallback 回调
+     */
+    public static void GetCollectWebSiteList(StringCallback stringCallback) {
+        String url = "/lg/collect/usertools/json";
+        OkHttpUtils.get()
+                .url(baseUrl + url)
                 .build()
                 .execute(stringCallback);
     }

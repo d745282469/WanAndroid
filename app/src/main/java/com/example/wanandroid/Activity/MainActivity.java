@@ -92,10 +92,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if (spManager.getStatus() == 1) {
-            navigationView.getMenu().getItem(3).setTitle("注销");
-            tv_slide_header_username.setText(spManager.getUerName());
-        }
+        //检测是否登录过期
+        WanApi.GetCollectWebSiteList(new StringCallback() {
+            @Override
+            public void onError(Call call, Exception e, int id) {
+                L.e(TAG,"获取收藏网站失败："+e.toString());
+            }
+
+            @Override
+            public void onResponse(String response, int id) {
+                JsonObject object = new Gson().fromJson(response,JsonObject.class);
+                if (object.get("errorCode").getAsInt() == -1001){
+                    //登录过期了
+                    spManager.saveStatus(0);
+                    navigationView.getMenu().getItem(3).setTitle("登陆");
+                    tv_slide_header_username.setText(getResources().getString(R.string.nav_header_username_default));
+                }else {
+                    spManager.saveStatus(1);
+                    navigationView.getMenu().getItem(3).setTitle("注销");
+                    tv_slide_header_username.setText(spManager.getUerName());
+                }
+            }
+        });
     }
 
     private void initView() {

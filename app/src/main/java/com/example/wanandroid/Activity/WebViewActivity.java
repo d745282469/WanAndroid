@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.Html;
 import android.webkit.WebChromeClient;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
@@ -107,7 +106,7 @@ public class WebViewActivity extends AppCompatActivity {
                         });
                     }else {
                         //从收藏列表跳入的已收藏的站外文章
-                        WanApi.CanccelCollect_2(id, originId, new StringCallback() {
+                        WanApi.CancelCollect_2(id, originId, new StringCallback() {
                             @Override
                             public void onError(Call call, Exception e, int id) {
                                 Toast.makeText(context,"取消收藏失败：网络错误",Toast.LENGTH_SHORT).show();
