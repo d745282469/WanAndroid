@@ -248,6 +248,8 @@ public class WanApi {
                 .url(baseUrl + url)
                 .build()
                 .execute(stringCallback);
+        OkHttpClient client = OkHttpUtils.getInstance().getOkHttpClient();
+        L.d(client.cookieJar().loadForRequest(HttpUrl.parse(baseUrl)).toString());
     }
 
     /**

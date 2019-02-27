@@ -14,6 +14,7 @@ import okhttp3.OkHttpClient;
 
 public class Application extends android.app.Application {
     private static final String TAG = "Application";
+    private static Application instance;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -33,6 +34,14 @@ public class Application extends android.app.Application {
         }
 
         //bugly 异常上报
-        CrashReport.initCrashReport(getApplicationContext(),"c6eedcd771",true);
+        CrashReport.initCrashReport(getApplicationContext(),"c6eedcd771",false);
+        instance = this;
+    }
+
+    public static Application getInstance(){
+        if (instance == null){
+            instance = new Application();
+        }
+        return instance;
     }
 }

@@ -30,6 +30,7 @@
     <!--设置页-->
     <string name="setting_cache_label">清理缓存</string>
     <string name="setting_no_img_label">无图模式</string>
+    <string name="setting_change_theme">检查更新</string>
 
     <!--关于我们-->
     <string name="about_us_text_1"><![CDATA[

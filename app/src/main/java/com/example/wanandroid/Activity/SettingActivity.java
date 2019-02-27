@@ -21,7 +21,7 @@ import java.io.File;
 public class SettingActivity extends AppCompatActivity {
     private static final String TAG = "SettingActivity";
     private WebBar webBar;
-    private LinearLayout ll_clear_cache,ll_no_img_mod;
+    private LinearLayout ll_clear_cache,ll_no_img_mod, ll_check_version;
     private TextView tv_cache_size;
     private CheckBox cb_no_img;
 
@@ -48,6 +48,7 @@ public class SettingActivity extends AppCompatActivity {
         ll_clear_cache = findViewById(R.id.ll_clear_cache);
         ll_no_img_mod = findViewById(R.id.ll_no_img_mod);
         cb_no_img = findViewById(R.id.cb_no_img);
+        ll_check_version = findViewById(R.id.ll_check_version);
 
         webBar.showRightIcon(false);
         webBar.setTitle("设置");
@@ -92,6 +93,13 @@ public class SettingActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 spManager.setNoImg(b);
+            }
+        });
+
+        ll_check_version.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
     }

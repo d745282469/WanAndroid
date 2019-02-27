@@ -15,6 +15,12 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TestAppTheme"  parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">#03A9F4</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
     <style name="TabLayoutTheme" parent="TextAppearance.AppCompat.Button">
         <item name="android:textAllCaps">false</item>
     </style>
