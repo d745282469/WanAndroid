@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activity.SettingActivity"
+    android:orientation="vertical"
+    android:background="@color/page_background_color">
+
+    <com.example.wanandroid.CustomView.WebBar
+        android:id="@+id/web_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/page_text_white"
+        android:elevation="10dp"
+        >
+
+       <LinearLayout
+           android:id="@+id/ll_clear_cache"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:paddingTop="@dimen/page_padding"
+           android:paddingLeft="@dimen/page_padding"
+           android:paddingBottom="@dimen/page_padding"
+           android:paddingRight="5dp"
+           android:gravity="center_vertical"
+           android:clickable="true"
+           android:background="@drawable/page_select_result">
+           <TextView
+               android:layout_width="0dp"
+               android:layout_height="wrap_content"
+               android:layout_weight="1"
+               android:text="@string/setting_cache_label"
+               android:textColor="@color/page_text_normal"
+               android:textSize="@dimen/page_text_size_normal"
+
+               />
+
+           <TextView
+               android:id="@+id/tv_cache_size"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/app_name"
+               android:textSize="@dimen/page_text_size_normal"
+               android:maxLines="1"
+               android:ellipsize="end"/>
+
+           <ImageView
+               android:layout_width="25dp"
+               android:layout_height="25dp"
+               android:src="@drawable/page_line_arrow"
+               />
+       </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

@@ -35,6 +35,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.zhy.http.okhttp.callback.StringCallback;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
 
         replaceFragment(new HomeFragment());
     }
+
+
 
     @Override
     protected void onResume() {
@@ -169,6 +172,9 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.nav_about:
                         startActivity(new Intent(MainActivity.this, AboutUsActivity.class));
+                        break;
+                    case R.id.nav_setting:
+                        startActivity(new Intent(MainActivity.this,SettingActivity.class));
                         break;
                 }
                 return true;

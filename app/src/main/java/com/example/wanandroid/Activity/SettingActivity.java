@@ -1,0 +1,136 @@
+package com.example.wanandroid.Activity;
+
+import android.annotation.SuppressLint;
+import android.content.Context;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.wanandroid.CustomView.GeneralDialog;
+import com.example.wanandroid.CustomView.WebBar;
+import com.example.wanandroid.R;
+import com.example.wanandroid.Utils.L;
+
+import java.io.File;
+
+public class SettingActivity extends AppCompatActivity {
+    private static final String TAG = "SettingActivity";
+    private WebBar webBar;
+    private LinearLayout ll_clear_cache;
+    private TextView tv_cache_size;
+
+    private Context context;
+    private final String CLEAR_CACHE_MSG = "你正在执行清除缓存动作，清除缓存后，所有数据将重新从服务器加载";
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_setting);
+        context = this;
+
+        initView();
+        setCaCheSize();
+        initEvent();
+    }
+
+    private void initView() {
+        webBar = findViewById(R.id.web_bar);
+        tv_cache_size = findViewById(R.id.tv_cache_size);
+        ll_clear_cache = findViewById(R.id.ll_clear_cache);
+
+        webBar.showRightIcon(false);
+        webBar.setTitle("设置");
+    }
+
+    private void initEvent() {
+        ll_clear_cache.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final GeneralDialog dialog = new GeneralDialog(context, CLEAR_CACHE_MSG);
+                dialog.show();
+                dialog.setOnSureListener(new GeneralDialog.OnSureListener() {
+                    @Override
+                    public void onSure() {
+                        if (deleteDir(context.getCacheDir())) {
+                            dialog.dismiss();
+                            Toast.makeText(context, "清除缓存成功", Toast.LENGTH_SHORT).show();
+                            setCaCheSize();
+                        } else {
+                            Toast.makeText(context, "清除缓存失败", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    /**
+     * 获取某个文件的大小
+     *
+     * @param file 文件
+     * @return 文件大小
+     */
+    private long getFileSize(File file) {
+        long size = 0;
+        File[] files = file.listFiles();
+        for (int i = 0; i < files.length; i++) {
+            if (files[i].isDirectory()) {
+                size = size + getFileSize(files[i]);
+            } else {
+                size = size + files[i].length();
+            }
+        }
+        return size;
+    }
+
+    /**
+     * 清除某个文件以及下面的所有文件夹
+     *
+     * @param file 文件
+     * @return 成功/失败
+     */
+    private boolean deleteDir(File file) {
+        if (file != null) {
+            if (file.isDirectory()){
+                File[] files = file.listFiles();
+                for (File file1 : files) {
+                    boolean b = deleteDir(file1);
+                    if (!b) {
+                        return false;
+                    }
+                }
+            }
+            return file.delete();
+        } else {
+            return false;
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private void setCaCheSize() {
+        //获取应用缓存大小
+        File file = new File(this.getCacheDir().getPath());
+        long size = getFileSize(file);
+        int dimen = 0;
+        while (size > 1000) {
+            size = size / 1000;
+            dimen++;
+        }
+        switch (dimen) {
+            case 0:
+                tv_cache_size.setText(size + " B");
+                break;
+            case 1:
+                tv_cache_size.setText(size + " K");
+                break;
+            case 2:
+                tv_cache_size.setText(size + " M");
+                break;
+        }
+    }
+
+}
