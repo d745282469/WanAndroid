@@ -2,6 +2,8 @@ package com.example.wanandroid.Activity;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +17,8 @@ import com.example.wanandroid.CustomView.GeneralDialog;
 import com.example.wanandroid.CustomView.WebBar;
 import com.example.wanandroid.R;
 import com.example.wanandroid.Utils.SpManager;
+import com.tencent.bugly.Bugly;
+import com.tencent.bugly.beta.Beta;
 
 import java.io.File;
 
@@ -22,7 +26,7 @@ public class SettingActivity extends AppCompatActivity {
     private static final String TAG = "SettingActivity";
     private WebBar webBar;
     private LinearLayout ll_clear_cache,ll_no_img_mod, ll_check_version;
-    private TextView tv_cache_size;
+    private TextView tv_cache_size,tv_version;
     private CheckBox cb_no_img;
 
     private Context context;
@@ -40,6 +44,15 @@ public class SettingActivity extends AppCompatActivity {
         initView();
         setCaCheSize();
         initEvent();
+
+        //检测版本号
+        PackageManager manager = getPackageManager();
+        try {
+            PackageInfo info = manager.getPackageInfo(getPackageName(),0);
+            tv_version.setText("v"+info.versionName);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initView() {
@@ -49,6 +62,7 @@ public class SettingActivity extends AppCompatActivity {
         ll_no_img_mod = findViewById(R.id.ll_no_img_mod);
         cb_no_img = findViewById(R.id.cb_no_img);
         ll_check_version = findViewById(R.id.ll_check_version);
+        tv_version = findViewById(R.id.tv_version);
 
         webBar.showRightIcon(false);
         webBar.setTitle("设置");
@@ -99,7 +113,7 @@ public class SettingActivity extends AppCompatActivity {
         ll_check_version.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Beta.checkUpgrade();
             }
         });
     }

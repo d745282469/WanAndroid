@@ -1,6 +1,7 @@
 package com.example.wanandroid.Activity;
 
 import com.example.wanandroid.Utils.L;
+import com.tencent.bugly.Bugly;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.cookie.CookieJarImpl;
@@ -34,7 +35,7 @@ public class Application extends android.app.Application {
         }
 
         //bugly 异常上报
-        CrashReport.initCrashReport(getApplicationContext(),"c6eedcd771",false);
+        Bugly.init(getApplicationContext(),"c6eedcd771",true);
         instance = this;
     }
 
