@@ -27,7 +27,7 @@ public class Application extends android.app.Application {
                 .build();//其他okHttp配置也可以在这里设置
         OkHttpUtils.initClient(client);
 
-        L.isDebug(true);
+        L.isDebug(false);
         List<Cookie> cookies = cookieJar.loadForRequest(HttpUrl.parse("http://www.wanandroid.com"));
         for (int i = 0,size = cookies.size(); i < size; i++){
             Cookie cookie = cookies.get(i);
@@ -35,7 +35,7 @@ public class Application extends android.app.Application {
         }
 
         //bugly 异常上报
-        Bugly.init(getApplicationContext(),"c6eedcd771",true);
+        Bugly.init(getApplicationContext(),"c6eedcd771",false);
         instance = this;
     }
 

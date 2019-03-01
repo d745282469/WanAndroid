@@ -16,6 +16,7 @@ import android.widget.Toast;
 import com.example.wanandroid.CustomView.GeneralDialog;
 import com.example.wanandroid.CustomView.WebBar;
 import com.example.wanandroid.R;
+import com.example.wanandroid.Utils.L;
 import com.example.wanandroid.Utils.SpManager;
 import com.tencent.bugly.Bugly;
 import com.tencent.bugly.beta.Beta;
