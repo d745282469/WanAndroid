@@ -8,7 +8,7 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 
 public class WanApi {
-    private final static String baseUrl = "http://www.wanandroid.com";
+    private final static String baseUrl = "https://www.wanandroid.com";
 
     /**
      * 登陆
